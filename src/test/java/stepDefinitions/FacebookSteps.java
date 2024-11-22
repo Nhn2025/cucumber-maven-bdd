@@ -20,18 +20,45 @@ public class FacebookSteps {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
     }
 
-    @Then("Verify email textbox is displayed")
-    public void verifyEmailTextboxIsDisplayed() {
-        Assert.assertTrue(driver.findElement(By.id("email")).isDisplayed());
-    }
-
-    @And("Verify password textbox is displayed")
-    public void verifyPasswordTextboxIsDisplayed() {
-        Assert.assertTrue(driver.findElement(By.id("pass")).isDisplayed());
-    }
-
     @And("Close application")
     public void closeApplication() {
         driver.quit();
+    }
+
+    @Then("Input to Username textbox")
+    public void inputToUsernameTextbox() {
+        driver.findElement(By.id("email")).clear();
+        driver.findElement(By.id("email")).sendKeys("nhu@gmail.com");
+    }
+
+    @And("Input to Password textbox")
+    public void inputToPasswordTextbox() {
+        driver.findElement(By.id("pass")).clear();
+        driver.findElement(By.id("pass")).sendKeys("12345");
+    }
+
+    @And("Click to Submit button")
+    public void clickToSubmitButton() {
+        driver.findElement(By.name("login")).click();
+    }
+
+    @Then("Input to Username textbox with {string}")
+    public void inputToUsernameTextboxWith(String email) {
+        driver.findElement(By.id("email")).clear();
+        driver.findElement(By.id("email")).sendKeys(email);
+    }
+
+    @And("Input to Password textbox with {string}")
+    public void inputToPasswordTextboxWith(String password) {
+        driver.findElement(By.id("pass")).clear();
+        driver.findElement(By.id("pass")).sendKeys(password);
+    }
+
+    @Then("Input to Username with {string} and Password with {string}")
+    public void inputToUsernameWithAndPasswordWith(String email, String password) {
+        driver.findElement(By.id("email")).clear();
+        driver.findElement(By.id("pass")).clear();
+        driver.findElement(By.id("email")).sendKeys(email);
+        driver.findElement(By.id("pass")).sendKeys(password);
     }
 }
