@@ -1,26 +1,34 @@
 package stepDefinitions;
 
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import org.junit.Assert;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.Map;
 
 public class FacebookSteps {
     WebDriver driver;
 
-    @Given("Open facebook application")
+    //@Given("Open facebook application")
+    @Before("@parameter")
     public void openFacebookApplication() {
-        driver = new FirefoxDriver();
+        driver = new ChromeDriver();
         driver.get("https://www.facebook.com/");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
     }
 
-    @And("Close application")
+    //@And("Close application")
+    @After("@parameter")
     public void closeApplication() {
         driver.quit();
     }
@@ -61,4 +69,25 @@ public class FacebookSteps {
         driver.findElement(By.id("email")).sendKeys(email);
         driver.findElement(By.id("pass")).sendKeys(password);
     }
+
+    @When("Input to Username and Password")
+    public void inputToUsernameAndPassword(DataTable customerTable) {
+        List<Map<String, String>> customer = customerTable.asMaps(String.class, String.class);
+
+        for (Map<String, String> row : customer) {
+            String username = row.get("Username");
+            String password = row.get("Password");
+
+            // Điền Username
+            driver.findElement(By.id("email")).clear();
+            driver.findElement(By.id("email")).sendKeys(username);
+
+            // Điền Password
+            driver.findElement(By.id("pass")).clear();
+            driver.findElement(By.id("pass")).sendKeys(password);
+
+            // Add thêm logic xử lý nếu cần
+        }
+    }
+
 }

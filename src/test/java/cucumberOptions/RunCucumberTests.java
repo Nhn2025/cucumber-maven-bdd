@@ -5,7 +5,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import org.testng.annotations.Test;
 
 @CucumberOptions(
-        features = "src/test/resources/features/verifyFacebook.feature",
+        features = "src/test/resources/features",
         glue = "stepDefinitions",
         plugin = {"pretty", "html:target/cucumber-html-report.html"}
 )
