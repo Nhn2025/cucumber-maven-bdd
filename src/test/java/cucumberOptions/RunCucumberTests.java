@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
         glue = "stepDefinitions",
         plugin = {"pretty", "html:target/cucumber-html-report.html"}
 )
-//cm
 
 @Test
 public class RunCucumberTests extends AbstractTestNGCucumberTests {
